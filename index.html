@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ===================== PAGE SETUP ===================== -->
+    <meta charset="UTF-8">
+    <!-- Makes the site scale properly on phones (responsive) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Loom – a fashion and clothing store with seasonal collections.">
+    <title>Loom | Fashion & Clothing</title>
+
+    <!-- Google Fonts: Bodoni Moda (fashion-magazine headings) + DM Sans (clean body text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- All styles live in style.css -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ===================== HEADER / NAVBAR ===================== -->
+    <header>
+        <nav class="container nav">
+            <a href="#home" class="logo">Loom</a>
+
+            <!-- Navigation links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#trends">Trends</a></li>
+                <li><a href="#lookbook">Lookbook</a></li>
+                <li><a href="#feedback">Feedback</a></li>
+            </ul>
+
+            <!-- Mobile menu button (shown only on phones) -->
+            <div class="nav-icons">
+                <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ===================== HERO SECTION ===================== -->
+        <section class="hero" id="home">
+            <div class="hero-text">
+                <h1>Made to be worn, not stored.</h1>
+                <p>Everyday clothing in honest fabrics — linen, cotton and wool — cut to last more than one season.</p>
+                <div class="hero-buttons">
+                    <a href="#shop" class="btn">Shop the collection</a>
+                    <a href="#trends" class="btn btn-outline">See this season's trends</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80"
+                     alt="Rack of neatly hung clothes in neutral tones">
+                <span class="hero-caption">Autumn / Winter 2026 collection</span>
+            </div>
+        </section>
+
+        <!-- ===================== CATEGORIES ===================== -->
+        <section id="categories">
+            <div class="container">
+                <h2 class="section-title">Shop by category</h2>
+                <p class="section-intro">Pick a category to jump straight to those pieces in the shop.</p>
+
+                <!-- data-category is read by JavaScript to filter the shop -->
+                <div class="category-grid">
+                    <button class="category-card" data-category="women">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" alt="Woman in a light summer outfit">
+                        <span>Women</span>
+                    </button>
+                    <button class="category-card" data-category="men">
+                        <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&q=80" alt="Man in a tailored jacket">
+                        <span>Men</span>
+                    </button>
+                    <button class="category-card" data-category="footwear">
+                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&q=80" alt="Pair of sneakers">
+                        <span>Footwear</span>
+                    </button>
+                    <button class="category-card" data-category="accessories">
+                        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&q=80" alt="Leather handbag">
+                        <span>Accessories</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SHOP / PRODUCTS ===================== -->
+        <section id="shop">
+            <div class="container">
+                <h2 class="section-title">The collection</h2>
+                <p class="section-intro">Filter by category, search by name or sort by price.</p>
+
+                <!-- Filter buttons, search box and sort dropdown -->
+                <div class="shop-controls">
+                    <div class="filters" id="filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="women">Women</button>
+                        <button class="filter-btn" data-filter="men">Men</button>
+                        <button class="filter-btn" data-filter="footwear">Footwear</button>
+                        <button class="filter-btn" data-filter="accessories">Accessories</button>
+                    </div>
+                    <div class="search-sort">
+                        <input type="search" id="searchBox" placeholder="Search products" aria-label="Search products">
+                        <select id="sortSelect" aria-label="Sort products">
+                            <option value="default">Featured</option>
+                            <option value="low">Price: low to high</option>
+                            <option value="high">Price: high to low</option>
+                            <option value="name">Name: A to Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Products are added here by JavaScript (see renderProducts) -->
+                <div class="product-grid" id="productGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===================== SEASONAL TRENDS ===================== -->
+        <section class="trends" id="trends">
+            <div class="container">
+                <h2 class="section-title">Seasonal trends</h2>
+                <p class="section-intro">What we're wearing now, and what's coming next.</p>
+
+                <!-- Tab buttons: data-tab matches the id of a panel below -->
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="autumn">Autumn / Winter</button>
+                    <button class="tab-btn" data-tab="spring">Spring / Summer</button>
+                    <button class="tab-btn" data-tab="festive">Festive edit</button>
+                </div>
+
+                <!-- Panel 1 -->
+                <div class="trend-panel active" id="autumn">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1000&q=80" alt="Woman carrying shopping bags in autumn clothes">
+                    <div>
+                        <h3>Layers in warm, earthy tones</h3>
+                        <p>Long wool coats over fine knits, wide trousers and boots you can walk all day in.</p>
+                        <ul class="trend-list">
+                            <li><span class="swatch" style="background:#7A4B2A"></span> Chocolate brown outerwear</li>
+                            <li><span class="swatch" style="background:#8C8C5E"></span> Olive knitwear</li>
+                            <li><span class="swatch" style="background:#C9B79C"></span> Camel trousers</li>
+                        </ul>
+                        <a href="#shop" class="btn" data-goto="women">Shop autumn pieces</a>
+                    </div>
+                </div>
+
+                <!-- Panel 2 -->
+                <div class="trend-panel" id="spring">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1000&q=80" alt="Model in a light flowing summer dress">
+                    <div>
+                        <h3>Light linen and soft colour</h3>
+                        <p>Breathable fabrics for hot days: relaxed shirts, flowing dresses and simple sandals.</p>
+                        <ul class="trend-list">
+                            <li><span class="swatch" style="background:#F2DCD5"></span> Blush linen sets</li>
+                            <li><span class="swatch" style="background:#A7B8A1"></span> Sage cotton shirts</li>
+                            <li><span class="swatch" style="background:#F5F1E6"></span> Off-white everything</li>
+                        </ul>
+                        <a href="#shop" class="btn" data-goto="men">Shop summer pieces</a>
+                    </div>
+                </div>
+
+                <!-- Panel 3 -->
+                <div class="trend-panel" id="festive">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1000&q=80" alt="Clothes and accessories laid out for an occasion">
+                    <div>
+                        <h3>Rich fabrics for celebrations</h3>
+                        <p>Deep jewel colours, a little shine and accessories that finish the look for Diwali and wedding season.</p>
+                        <ul class="trend-list">
+                            <li><span class="swatch" style="background:#6B1E3A"></span> Wine and maroon</li>
+                            <li><span class="swatch" style="background:#1F4E5F"></span> Peacock teal</li>
+                            <li><span class="swatch" style="background:#C9A646"></span> Antique gold details</li>
+                        </ul>
+                        <a href="#shop" class="btn" data-goto="accessories">Shop festive accessories</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== LOOKBOOK GALLERY ===================== -->
+        <section id="lookbook">
+            <div class="container">
+                <h2 class="section-title">Lookbook</h2>
+                <p class="section-intro">Outfit ideas from this season. Tap any photo to see it larger.</p>
+
+                <!-- Each figure is clickable; JavaScript opens it in a lightbox -->
+                <div class="lookbook-grid">
+                    <figure class="look tall">
+                        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=80" alt="Model in a long coat on a city street">
+                        <figcaption>City layers</figcaption>
+                    </figure>
+                    <figure class="look">
+                        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=80" alt="Clothes hanging on a rail">
+                        <figcaption>Wardrobe basics</figcaption>
+                    </figure>
+                    <figure class="look">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80" alt="Model in an elegant evening outfit">
+                        <figcaption>Evening wear</figcaption>
+                    </figure>
+                    <figure class="look wide">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1000&q=80" alt="Inside a bright clothing boutique">
+                        <figcaption>Visit our store</figcaption>
+                    </figure>
+                    <figure class="look">
+                        <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=800&q=80" alt="Model posing in a casual outfit">
+                        <figcaption>Weekend casual</figcaption>
+                    </figure>
+                    <figure class="look">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80" alt="Model in a bold statement look">
+                        <figcaption>Statement pieces</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox: big image popup used by the lookbook -->
+        <div class="lightbox" id="lightbox" aria-hidden="true">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close image">✕</button>
+            <img id="lightboxImg" src="" alt="">
+            <p id="lightboxCaption"></p>
+        </div>
+
+        <!-- ===================== FEEDBACK FORM ===================== -->
+        <section id="feedback">
+            <div class="container feedback-wrap">
+                <div>
+                    <h2 class="section-title">Tell us what you think</h2>
+                    <p class="section-intro">Your feedback helps us choose what to make next. It takes less than a minute.</p>
+
+                    <!-- Decorative image next to the form -->
+                    <img class="feedback-img"
+                         src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=900&q=80"
+                         alt="Shop assistant arranging clothes in a store">
+
+                    <!-- Result box: filled by JavaScript after submitting -->
+                    <div id="result" role="status" aria-live="polite"></div>
+                </div>
+
+                <!-- novalidate = we do our own validation in JavaScript -->
+                <form class="feedback-form" id="feedbackForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Your name">
+                            <small class="error-text" id="nameError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="you@example.com">
+                            <small class="error-text" id="emailError"></small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="topic">What is your feedback about?</label>
+                        <select id="topic">
+                            <option>Product quality</option>
+                            <option>Sizing and fit</option>
+                            <option>Website experience</option>
+                            <option>Delivery</option>
+                            <option>Something else</option>
+                        </select>
+                    </div>
+
+                    <!-- Star rating (5 radio buttons) -->
+                    <div class="form-group">
+                        <label>Your rating</label>
+                        <div class="stars">
+                            <input type="radio" name="rating" id="star5" value="5"><label for="star5" title="5 stars">★</label>
+                            <input type="radio" name="rating" id="star4" value="4"><label for="star4" title="4 stars">★</label>
+                            <input type="radio" name="rating" id="star3" value="3"><label for="star3" title="3 stars">★</label>
+                            <input type="radio" name="rating" id="star2" value="2"><label for="star2" title="2 stars">★</label>
+                            <input type="radio" name="rating" id="star1" value="1"><label for="star1" title="1 star">★</label>
+                        </div>
+                        <small class="error-text" id="ratingError"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="What did you like, and what could be better?"></textarea>
+                        <small class="error-text" id="messageError"></small>
+                    </div>
+
+                    <button type="submit" class="btn">Send feedback</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#home" class="logo">Loom</a>
+                    <p style="color:var(--muted); margin-top:10px; max-width:32ch; font-size:0.9rem;">
+                        Clothing designed in small batches and made to be worn often.
+                    </p>
+                </div>
+                <div>
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#shop">Women</a></li>
+                        <li><a href="#shop">Men</a></li>
+                        <li><a href="#shop">Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#feedback">Contact us</a></li>
+                        <li><a href="#feedback">Size guide</a></li>
+                        <li><a href="#feedback">Returns</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Get new arrivals by email</h4>
+                    <form class="newsletter" id="newsletterForm">
+                        <input type="email" id="newsEmail" placeholder="Email address" aria-label="Email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Small photo strip, like an Instagram feed -->
+            <div class="insta-strip">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=300&q=70" alt="Shopping bags">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&q=70" alt="Summer outfit">
+                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&q=70" alt="Leather jacket">
+                <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&q=70" alt="Sneakers">
+                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300&q=70" alt="Handbag">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=300&q=70" alt="Clothing rack">
+            </div>
+            <p class="copyright">&copy; <span id="year"></span> Loom. A student project.</p>
+        </div>
+    </footer>
+
+    <!-- Toast (small popup message) and back-to-top button -->
+    <div class="toast" id="toast"></div>
+    <button id="backToTop" aria-label="Back to top">↑</button>
+
+
+    <!-- All JavaScript lives in script.js (loaded last so the HTML exists first) -->
+    <script src="script.js"></script>
+</body>
+</html>

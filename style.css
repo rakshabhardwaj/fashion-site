@@ -1,0 +1,618 @@
+/* =========================================================
+   Loom – Fashion & Clothing Website
+   style.css : all the styling for index.html
+   ========================================================= */
+
+/* ======================================================
+   1. DESIGN TOKENS (CSS variables)
+   Change these values to re-theme the whole website.
+   ====================================================== */
+:root {
+    --paper: #FBFAF8;      /* page background            */
+    --ink: #1A1A2E;        /* main text colour           */
+    --cobalt: #2F3BD6;     /* accent (buttons, links)    */
+    --blush: #F2DCD5;      /* soft panels                */
+    --sage: #A7B8A1;       /* secondary accent           */
+    --muted: #6B6B7B;      /* secondary text             */
+    --line: #E4E1DC;       /* borders                    */
+
+    --font-display: "Bodoni Moda", "Didot", Georgia, serif;
+    --font-body: "DM Sans", "Segoe UI", Arial, sans-serif;
+
+    --max-width: 1200px;
+}
+
+/* ======================================================
+   2. RESET & BASE STYLES
+   ====================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+button { font-family: inherit; cursor: pointer; }
+
+/* Visible outline for keyboard users (accessibility) */
+:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; }
+
+/* Centered container used by every section */
+.container {
+    width: 90%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+section { padding: 80px 0; }
+
+/* Section headings */
+.section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.section-intro {
+    color: var(--muted);
+    max-width: 55ch;
+    margin-bottom: 40px;
+}
+
+/* Reusable button styles */
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.btn:hover { background: var(--cobalt); border-color: var(--cobalt); }
+
+.btn-outline { background: transparent; color: var(--ink); }
+.btn-outline:hover { color: var(--paper); }
+
+/* ======================================================
+   3. HEADER / NAVIGATION BAR
+   ====================================================== */
+header {
+    position: sticky;   /* stays at top while scrolling */
+    top: 0;
+    z-index: 100;
+    background: rgba(251, 250, 248, 0.95);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-style: italic;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+}
+.nav-links a:hover { border-bottom-color: var(--ink); }
+
+.nav-icons { display: flex; align-items: center; gap: 8px; }
+
+.icon-btn {
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    padding: 8px;
+    color: var(--ink);
+}
+
+/* Hamburger button – hidden on desktop, shown on mobile */
+.menu-toggle { display: none; }
+
+/* ======================================================
+   4. HERO SECTION
+   ====================================================== */
+.hero {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 70px);
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 6%;
+}
+
+/* The big editorial headline – the "memorable" element of the page */
+.hero-text h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+
+.hero-text p {
+    color: var(--muted);
+    max-width: 42ch;
+    margin-bottom: 32px;
+    font-size: 1.05rem;
+}
+
+.hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero-image { position: relative; overflow: hidden; background: var(--blush); }
+
+.hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Little caption tag on top of the hero photo */
+.hero-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: var(--paper);
+    padding: 10px 16px;
+    font-size: 0.85rem;
+}
+
+/* ======================================================
+   5. CATEGORIES SECTION
+   ====================================================== */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.category-card {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--blush);
+    border: none;
+    text-align: left;
+    color: #fff;
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+.category-card:hover img { transform: scale(1.05); }
+
+/* Dark fade at the bottom so the white text is readable */
+.category-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(26, 26, 46, 0.7));
+}
+
+.category-card span {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+}
+
+/* ======================================================
+   6. SHOP / PRODUCTS SECTION
+   ====================================================== */
+.shop-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.filter-btn {
+    padding: 8px 18px;
+    border: 1px solid var(--line);
+    background: transparent;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--ink);
+}
+.filter-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+.search-sort { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.search-sort input,
+.search-sort select {
+    padding: 9px 14px;
+    border: 1px solid var(--line);
+    background: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 32px 20px;
+}
+
+.product-card { display: flex; flex-direction: column; }
+
+.product-image {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: var(--blush);
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.product-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* "New" or "Sale" tag on a product */
+.product-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--paper);
+    font-size: 0.75rem;
+    padding: 4px 10px;
+}
+.product-tag.sale { background: var(--cobalt); color: #fff; }
+
+.product-info h3 { font-size: 1rem; font-weight: 500; }
+
+.product-meta { color: var(--muted); font-size: 0.85rem; }
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.price { font-weight: 700; }
+.old-price { color: var(--muted); text-decoration: line-through; font-weight: 400; margin-left: 6px; font-size: 0.85rem; }
+
+
+/* Shown when the search finds nothing */
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
+}
+
+/* ======================================================
+   7. SEASONAL TRENDS SECTION (tabs)
+   ====================================================== */
+.trends { background: var(--ink); color: var(--paper); }
+.trends .section-intro { color: #B9B9C8; }
+
+.tab-buttons { display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+
+.tab-btn {
+    padding: 10px 22px;
+    background: transparent;
+    border: 1px solid #4A4A62;
+    color: var(--paper);
+    border-radius: 20px;
+}
+.tab-btn.active { background: var(--paper); color: var(--ink); }
+
+.trend-panel { display: none; }          /* panels hidden by default */
+.trend-panel.active { display: grid; }   /* only the active one shows */
+
+.trend-panel {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.trend-panel img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #2A2A44; }
+
+.trend-panel h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 2.2rem;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.trend-list { list-style: none; margin: 24px 0; }
+
+.trend-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #34344E;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+/* Colour swatch circle next to each trend */
+.swatch { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; }
+
+.trends .btn { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.trends .btn:hover { background: var(--cobalt); color: #fff; border-color: var(--cobalt); }
+
+/* ======================================================
+   8. FEEDBACK FORM SECTION
+   ====================================================== */
+.feedback-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 60px;
+}
+
+.feedback-form { display: grid; gap: 18px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.form-group label { font-size: 0.9rem; font-weight: 500; }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    background: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+/* Red border when a field fails validation */
+.form-group.invalid input,
+.form-group.invalid textarea { border-color: #C8324B; }
+
+.error-text { color: #C8324B; font-size: 0.8rem; min-height: 1em; }
+
+/* Star rating: radio buttons styled as stars */
+.stars {
+    display: flex;
+    flex-direction: row-reverse;   /* lets CSS highlight stars to the left */
+    justify-content: flex-end;
+    gap: 4px;
+}
+.stars input { position: absolute; opacity: 0; width: 0; }
+.stars label { font-size: 1.8rem; color: var(--line); cursor: pointer; }
+.stars input:checked ~ label,
+.stars label:hover,
+.stars label:hover ~ label { color: #E0A526; }
+.stars input:focus-visible + label { outline: 2px solid var(--cobalt); }
+
+/* Box that shows the submitted feedback (like #result in the sample) */
+#result {
+    display: none;
+    background: var(--blush);
+    padding: 20px;
+    border-left: 4px solid var(--cobalt);
+}
+#result.show { display: block; }
+
+/* ======================================================
+   9. FOOTER
+   ====================================================== */
+footer { border-top: 1px solid var(--line); padding: 60px 0 30px; }
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+footer h4 { font-size: 0.95rem; margin-bottom: 14px; }
+footer ul { list-style: none; }
+footer li { margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; }
+footer li a:hover { color: var(--ink); }
+
+.newsletter { display: flex; margin-top: 10px; }
+.newsletter input { flex: 1; padding: 10px; border: 1px solid var(--line); font-family: inherit; min-width: 0; }
+.newsletter button { padding: 10px 16px; border: none; background: var(--ink); color: #fff; }
+
+.copyright { text-align: center; color: var(--muted); font-size: 0.85rem; }
+
+/* ======================================================
+   10. TOAST MESSAGE + BACK TO TOP BUTTON
+   ====================================================== */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 22px;
+    font-size: 0.9rem;
+    z-index: 400;
+    transition: transform 0.3s;
+}
+.toast.show { transform: translate(-50%, 0); }
+
+#backToTop {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--cobalt);
+    color: #fff;
+    font-size: 1.2rem;
+    display: none;     /* JS shows it after scrolling */
+    z-index: 90;
+}
+
+/* ======================================================
+   11. RESPONSIVE DESIGN (Media Queries)
+   ====================================================== */
+
+/* Tablets */
+@media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-image { height: 60vh; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .trend-panel { grid-template-columns: 1fr; gap: 28px; }
+    .feedback-wrap { grid-template-columns: 1fr; gap: 32px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Phones */
+@media (max-width: 680px) {
+    section { padding: 56px 0; }
+
+    .menu-toggle { display: block; }
+
+    /* Mobile menu drops down under the header */
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+        display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li a { display: block; padding: 14px 5%; border-bottom: 1px solid var(--line); }
+
+    .form-row { grid-template-columns: 1fr; }
+    .shop-controls { flex-direction: column; align-items: stretch; }
+    .search-sort input, .search-sort select { flex: 1; }
+    .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ======================================================
+   12. LOOKBOOK GALLERY + LIGHTBOX
+   ====================================================== */
+.lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 260px;
+    gap: 16px;
+}
+
+.look {
+    position: relative;
+    overflow: hidden;
+    background: var(--blush);
+    cursor: zoom-in;
+}
+.look.tall { grid-row: span 2; }     /* takes 2 rows */
+.look.wide { grid-column: span 2; }  /* takes 2 columns */
+
+.look img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.look:hover img { transform: scale(1.04); }
+
+.look figcaption {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    background: var(--paper);
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* Full-screen popup for a large image */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 26, 46, 0.92);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px;
+    z-index: 500;
+}
+.lightbox.show { display: flex; }
+.lightbox img { max-height: 80vh; max-width: 90vw; object-fit: contain; }
+.lightbox p { color: var(--paper); font-family: var(--font-display); font-size: 1.3rem; }
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+/* ======================================================
+   13. FEEDBACK IMAGE + FOOTER PHOTO STRIP
+   ====================================================== */
+.feedback-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--blush);
+    margin-bottom: 24px;
+}
+
+.insta-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-bottom: 30px;
+}
+.insta-strip img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--blush); }
+
+/* Responsive rules for the new sections */
+@media (max-width: 900px) {
+    .lookbook-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
+    .look.wide { grid-column: span 2; }
+}
+@media (max-width: 680px) {
+    .lookbook-grid { grid-template-columns: 1fr; grid-auto-rows: 300px; }
+    .look.tall { grid-row: span 1; }
+    .look.wide { grid-column: span 1; }
+    .insta-strip { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Respect users who prefer less animation */
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+}
